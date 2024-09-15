@@ -10,22 +10,16 @@ class Bank:
         self.balance = 0
 
     def deposit(self):
-
-        global lock
-
         for i in range(100):
             with lock:
                 rand_num = randint(50, 500)
                 self.balance = self.balance + rand_num
                 print(f'Пополнение: {rand_num}. Баланс {self.balance}')
-                if self.balance >= 500 and lock.locked():
-                    lock.release()
+                # if self.balance >= 500 and lock.locked():
+                #     lock.release()
             time.sleep(0.001)
 
     def take(self):
-
-        global lock
-
         for k in range(100):
             with lock:
                 rand_num = randint(50, 500)
@@ -35,7 +29,7 @@ class Bank:
                     print(f'Снятие: {rand_num}. Баланс: {self.balance}')
                 else:
                     print('Запрос отклонён, не достаточно средств')
-                    lock.acquire()
+                    # lock.acquire()
             time.sleep(0.001)
 
 
